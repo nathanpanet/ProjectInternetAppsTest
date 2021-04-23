@@ -23,7 +23,17 @@ namespace ProjectInternetAppsTest.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Categories()
+        {
+            return View();
+        }
+
+        public IActionResult NewestGadgets()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
         {
             return View();
         }
