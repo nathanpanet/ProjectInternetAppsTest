@@ -23,10 +23,10 @@ namespace ProjectInternetAppsTest.Controllers
             return View();
         }
 
-        public IActionResult Categories()
-        {
-            return View();
-        }
+        //public IActionResult Categories()
+        //{
+        //    return View();
+        //}
 
         public IActionResult NewestGadgets()
         {
@@ -34,6 +34,21 @@ namespace ProjectInternetAppsTest.Controllers
         }
 
         public IActionResult Login()
+        {
+            return View();
+        }
+        
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        public IActionResult Category()
+        {
+            return View();
+        }
+
+        public IActionResult Product()
         {
             return View();
         }

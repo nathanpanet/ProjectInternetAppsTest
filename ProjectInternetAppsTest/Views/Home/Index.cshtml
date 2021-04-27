@@ -2,7 +2,24 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Categories</h1>
+
+<div class="container ">
+    <!--
+        כשנייצר את ה
+        DB
+        לעשות פה לולאה שרצה על כל הקטגוריות
+        -->
+    <div class="row">
+        @for (int i = 0; i < 15; i++)//foreach....
+        {
+            <div class="col p-4 text-center categorie-item">
+                <a class="text-light" style="text-decoration:none" asp-controller="Home" asp-action="Category">
+                    <!--to insert each link-->
+                    <img src="~/css/refrigerator_2x.png" alt="Category Name @i.ToString()" /> <!--to insert each img & name-->
+                    <p class="categorie-name">Category Name @i.ToString()</p><!--to insert each name-->
+                </a>
+            </div>
+        }
+    </div>
 </div>
