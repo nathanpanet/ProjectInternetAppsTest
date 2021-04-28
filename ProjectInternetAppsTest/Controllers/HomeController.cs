@@ -37,7 +37,11 @@ namespace ProjectInternetAppsTest.Controllers
         {
             return View();
         }
-        
+        public IActionResult Cart()
+        {
+            return View();
+        }
+
         public IActionResult SignUp()
         {
             return View();
