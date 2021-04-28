@@ -51,6 +51,10 @@ namespace ProjectInternetAppsTest.Controllers
         {
             return View();
         }
+        public IActionResult manager()
+        {
+            return View();
+        }
 
         public IActionResult Product()
         {

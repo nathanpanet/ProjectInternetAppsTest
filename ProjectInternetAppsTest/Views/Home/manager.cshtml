@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "manager"; 
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+
+    <div class="row">
+        @for (int i = 0; i < 6; i++)//foreach....
+        {
+        <div class="col p-4">
+            <div class="card text-center" style="width: 18rem;display:flex">
+                <div class="card-header">
+                    Product
+                </div> <!--should be the specific Product name-->
+                <img src="..." class="card-img-top" alt="..."><!--should be the specific Product img-->
+                <div class="card-body">
+                    <p class="card-text">
+                        <form class="navbar-form pull-left">
+                            <input type="text" value="price" class="span2">
+                            <button type="submit" class="btn">Submit</button>
+                        </form>
+                    </p>
+                    <p class="card-text">
+                        <form class="navbar-form pull-left">
+                            <input type="text" value="category" class="span2">
+                            <button type="submit" class="btn">Submit</button>
+                        </form>
+                    </p>
+                    <p class="card-text">
+                        <form class="navbar-form pull-left">
+                            <input type="text" value="value "class="span2">
+                            <button type="submit" class="btn">Submit</button>
+                        </form>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
