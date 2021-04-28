@@ -1,34 +1,35 @@
 ﻿@{
-    ViewData["Title"] = "Cart";
+    ViewData["Title"] = "Checkout"; //should be the specific category
 }
+
 <h1>@ViewData["Title"]</h1>
 
-<form class="row g-3">
-    <div class="col-md-6">
-        <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+<div class="container">
+    <div class="row">
+        @for (int i = 0; i < 15; i++)//foreach....
+        {
+            <div class="col p-4">
+                <div class="card text-center" style="width: 18rem;display:flex">
+                    <div class="card-header">
+                        Product Short Name
+                    </div> <!--should be the specific Product name-->
+                    <img src="..." class="card-img-top" alt="..."><!--should be the specific Product img-->
+                    <div class="card-body">
+                        <p class="card-text">
+                            product long name / + / some info djn hb vhb jb vjbs bvhber hvb hbvurb vbh vbvhb ruk cbhfvb dkjbv chbv brv hcb kcvjhbv jhcb jhrbv cjvbckd vhc udv bch bdvjh bhcb hbv ch bvhbrd jv bdhbv cjhbv jchbd cjhb hbd b
+                        </p><!--should be the specific Product info-->
+                        <b class="text-left" style="display: flex;">
+                            Price : 254.5 ₪
+                        </b><!--should be the specific Product price-->
+                        <br />
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-    <div class="col-md-6">
-        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+    <div class="col-md-12 text-center">
+        <a class="btn btn-primary col-md-4" asp-controller="Home" asp-action="Pay">
+            Payment
+        </a><!--should be the specific Product link-->
     </div>
-    <div class="col-md-6">
-        <label for="inputEmail4" class="form-label">Email</label>
-        <input type="email" class="form-control" id="inputEmail4">
-    </div>
-    <div class="col-md-6">
-        <label for="inputPassword4" class="form-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword4">
-    </div>
-    <div class="col-md-9">
-        <label for="inputAddress" class="form-label">Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="col-md-3">
-        <label for="inputCity" class="form-label">City</label>
-        <input type="text" class="form-control" id="inputCity">
-    </div>
-    <br />
-    <div class="col-12">
-        <br />
-        <button type="submit" class="btn btn-primary">Sign up</button>
-    </div>
-</form>
+</div>

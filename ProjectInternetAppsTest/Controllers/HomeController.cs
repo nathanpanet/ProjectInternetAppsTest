@@ -41,7 +41,14 @@ namespace ProjectInternetAppsTest.Controllers
         {
             return View();
         }
-
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Pay()
+        {
+            return View();
+        }
         public IActionResult SignUp()
         {
             return View();

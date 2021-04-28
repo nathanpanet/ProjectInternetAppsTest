@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Contact us";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form class="row g-3">
+    <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+    </div>
+    <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+    </div>
+    <div class="col-md-4">
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+    </div>
+    <div class="col-md-12">
+        <div class="form-control-range">
+            <label for="Complaint">Complaint</label>
+            <textarea class="form-control" id="Complaint" rows="5"></textarea>
+        </div>
+        <br />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
