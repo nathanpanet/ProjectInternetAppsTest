@@ -21,6 +21,6 @@ namespace ProjectInternetAppsTest.Models
         public UserType Type { get; set; } = UserType.User;
         public string Address { get; set; }
         public string Phone { get; set; }
-        public int CartOrderID { get; set; } // Will change
+        //public Cart Cart { get; set; } = null;
     }
 }
