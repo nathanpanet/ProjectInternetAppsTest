@@ -8,8 +8,8 @@ namespace ProjectInternetAppsTest.Models
     public enum OrderStatus
     {
         Cart,
-        ordered,
-        delivered
+        Ordered,
+        Delivered
     }
     public class Order
     {
