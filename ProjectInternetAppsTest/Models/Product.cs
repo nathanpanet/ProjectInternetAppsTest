@@ -11,8 +11,9 @@ namespace ProjectInternetAppsTest.Models
         public string Name { get; set; }
         public int Price { get; set; }
         public string Description { get; set; }
-        public int Discount { get; set; }
-        public string Image { get; set; } //which type ???
+        public double Discount { get; set; }
+        public byte[] Img { get; set; }
+        //public string Image { get; set; } //which type ???
         public List<Category> Categories { get; set; }
     }
 }

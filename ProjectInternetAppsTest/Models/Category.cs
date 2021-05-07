@@ -10,7 +10,8 @@ namespace ProjectInternetAppsTest.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Image { get; set; } //which type ???
+        public byte[] Img { get; set; }
+        //public string Image { get; set; } //which type ???
         public List<Product> Products { get; set; }
     }
 }
