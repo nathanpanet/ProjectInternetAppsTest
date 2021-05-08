@@ -15,7 +15,8 @@ namespace ProjectInternetAppsTest.Models
     {
         public int ID { get; set; }
         public DateTime AddedOn { get; set; }
-        //public DateTime ConfirmedOn { get; set; }
+        public DateTime ConfirmedOn { get; set; }
+        public DateTime PayedOn { get; set; }
         public OrderStatus Status { get; set; }
         public List<Product> Products { get; set; }
         public User User { get; set; }

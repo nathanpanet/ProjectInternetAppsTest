@@ -54,7 +54,7 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,AddedOn,Status,TotalPrice")] Order order)
+        public async Task<IActionResult> Create([Bind("ID,AddedOn,ConfirmedOn,PayedOn,Status,TotalPrice")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,AddedOn,Status,TotalPrice")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,AddedOn,ConfirmedOn,PayedOn,Status,TotalPrice")] Order order)
         {
             if (id != order.ID)
             {

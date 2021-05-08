@@ -16,6 +16,12 @@
                 @Html.DisplayNameFor(model => model.AddedOn)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ConfirmedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayedOn)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
@@ -29,6 +35,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.AddedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfirmedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayedOn)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)

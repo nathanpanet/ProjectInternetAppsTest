@@ -14,6 +14,7 @@ namespace ProjectInternetAppsTest.Models
         public double Discount { get; set; }
         public byte[] Img { get; set; }
         //public string Image { get; set; } //which type ???
-        public List<Category> Categories { get; set; }
+        //public List<Category> Categories { get; set; }
+        public Category Category { get; set; }
     }
 }
