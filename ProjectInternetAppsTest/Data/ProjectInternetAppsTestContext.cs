@@ -22,6 +22,6 @@ namespace ProjectInternetAppsTest.Data
 
         public DbSet<ProjectInternetAppsTest.Models.User> User { get; set; }
 
-        public DbSet<ProjectInternetAppsTest.Models.Cart> Cart { get; set; }
+        //public DbSet<ProjectInternetAppsTest.Models.Cart> Cart { get; set; }
     }
 }
