@@ -8,7 +8,8 @@ namespace ProjectInternetAppsTest.Models
     public enum UserType
     {
         Admin,
-        User
+        User,
+        Supplier
     }
     public class User
     {

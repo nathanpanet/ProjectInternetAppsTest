@@ -20,6 +20,6 @@ namespace ProjectInternetAppsTest.Models
         public OrderStatus Status { get; set; }
         public List<Product> Products { get; set; }
         public User User { get; set; }
-        public int TotalPrice { get; set; }//do we need it ???
+        public float TotalPrice { get; set; }
     }
 }
