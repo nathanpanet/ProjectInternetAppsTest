@@ -12,7 +12,5 @@ namespace ProjectInternetAppsTest.Models
         public string Description { get; set; }
         public byte[] Img { get; set; }
         public SaleDiscount Discount { get; set; }
-        //public string Image { get; set; } //which type ???
-        //public List<Product> Products { get; set; }
     }
 }

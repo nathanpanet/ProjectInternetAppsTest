@@ -12,7 +12,6 @@ namespace ProjectInternetAppsTest.Models
         public DateTime FromDate { get; set; }
         public DateTime TillDate { get; set; }
         public double Discount { get; set; } // should be in percentage
-        //public Product Product { get; set; }
         public string Description { get; set; }
     }
 }
