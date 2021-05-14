@@ -14,5 +14,6 @@ namespace ProjectInternetAppsTest.Models
         public byte[] Img { get; set; }
         public Category Category { get; set; }
         public SaleDiscount Discount { get; set; }
+        public List<Order> Orders { get; set; } //shoudnt be here but without this its makeing a one to many....
     }
 }
