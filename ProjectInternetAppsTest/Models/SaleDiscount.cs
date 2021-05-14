@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace ProjectInternetAppsTest.Models
 {
-    public class Category
+    public class SaleDiscount
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime TillDate { get; set; }
+        public double Discount { get; set; } // should be in percentage
+        //public Product Product { get; set; }
         public string Description { get; set; }
-        public byte[] Img { get; set; }
-        public SaleDiscount Discount { get; set; }
-        //public string Image { get; set; } //which type ???
-        //public List<Product> Products { get; set; }
     }
 }
