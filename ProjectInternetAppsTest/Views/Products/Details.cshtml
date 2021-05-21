@@ -1,42 +1,86 @@
 ﻿@model ProjectInternetAppsTest.Models.Product
+@{ ViewData["Title"] = "Product";} @*we should insert the specific product in controller and then view this in the H1*@
+<h1>@ViewData["Title"] @ViewData["Product"]</h1>
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
-
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Img)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Img)
-        </dd>
-    </dl>
+<div class="container bootdey">
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="col-sm-6">
+                    <h4 class="pro-d-title">@Model.Name</h4>
+                    <p>@Model.Description</p>
+                    <div class="product_meta">
+                        <span class="posted_in"> <strong>Category:</strong> <a href="#">@Model.Category</a>.</span>
+                    </div>
+                    <div class="m-bot15">
+                        <strong>Price : </strong>
+                        <span class="amount-old" style="text-decoration: line-through">@Model.Price </span>
+                        <span class="pro-price"> @Model.Price</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input id="Quantity" type="number" placeholder="1" class="form-control quantity">
+                    </div>
+                    <p>
+                        <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <div class="pro-img-details">
+                        <img src="https://via.placeholder.com/550x380/FFB6C1/000000" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Img)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Img)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

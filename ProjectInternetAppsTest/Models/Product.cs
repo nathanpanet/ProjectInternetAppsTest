@@ -11,6 +11,11 @@ namespace ProjectInternetAppsTest.Models
         public string Name { get; set; }
         public int Price { get; set; }
         public string Description { get; set; }
+
+        //anotation needed - short string
+        public string ShortDescription { get; set; } //for catgory page - we dont want to see there all the info
+        //Migration is needed
+        
         public byte[] Img { get; set; }
         public Category Category { get; set; }
         public SaleDiscount Discount { get; set; }

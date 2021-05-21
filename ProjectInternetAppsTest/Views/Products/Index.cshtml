@@ -1,53 +1,48 @@
 ﻿@model IEnumerable<ProjectInternetAppsTest.Models.Product>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Category"; @*we should insert the specific category in controller and then view this in the H1*@ }
+<h1>@ViewData["Title"] @ViewData["Category"]@*same as above*@</h1>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Img)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Img)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <p class="d-grid gap-2" @*for admin and supliers only not for users !!*@>
+        <a asp-action="Create" class="btn btn-secondary">Create New</a>
+    </p>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col p-4">
+                <div class="card text-center" style="width: 18rem;display:flex">
+                    <div class="card-header">
+                        @product.Name
+                    </div>
+                    <!--<img src="~/css/dairy-products.png" class="card-img-top" />-->
+                    <img src="@product.Img" class="card-img-top" /> @*צריך להציג כתמונה - נדרשות המרות*@
+                    <div class="card-body">
+                        <p class="card-text">
+                            @product.ShortDescription
+                        </p>
+                        <b class="text-left" style="display: flex;">
+                            Buy now for : @product.Price ₪ @*should have the discount if there is one!!!*@
+                        </b>
+                        <br />
+                        <a class="btn btn-primary"
+                           asp-controller="Home" asp-action="Details" asp-route-id="@product.ID">
+                            for more details
+                        </a>
+                        @*for admin only !!!!!! maybe the edit also for suplier*@
+                        @*for admin only !!!!!! maybe the edit also for suplier*@
+                        @*for admin only !!!!!! maybe the edit also for suplier*@
+                        @*for admin only !!!!!! maybe the edit also for suplier*@
+                        <a class="btn btn-outline-info btn-sm" asp-action="Edit" asp-route-id="@product.ID">
+                            Edit
+                        </a>
+                        <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@product.ID">
+                            Delete
+                        </a>
+                        @*till here*@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
