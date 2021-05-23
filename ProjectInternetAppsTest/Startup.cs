@@ -29,6 +29,11 @@ namespace ProjectInternetAppsTest
 
             services.AddDbContext<ProjectInternetAppsTestContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ProjectInternetAppsTestContext")));
+            
+            services.AddSession(optioons =>
+            {
+                optioons.IdleTimeout = TimeSpan.FromMinutes(15);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +53,8 @@ namespace ProjectInternetAppsTest
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
