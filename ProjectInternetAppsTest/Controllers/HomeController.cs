@@ -38,6 +38,8 @@ namespace ProjectInternetAppsTest.Controllers
         }
         public IActionResult Contact()
         {
+
+            //we should add a post function .... !!!!!!!!!!!!!!!
             return View();
         }
         public IActionResult Pay()

@@ -20,12 +20,16 @@ namespace ProjectInternetAppsTest.Controllers
             _context = context;
         }
 
+
+
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Users
         public async Task<IActionResult> Index()
         {
             return View(await _context.User.ToListAsync());
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,18 +48,21 @@ namespace ProjectInternetAppsTest.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
+
+
+
+        // GET: Users/SignUp
+        public IActionResult SignUp()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Users/SignUp
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,UserName,Password,Email,Address,Phone")] User user)
+        public async Task<IActionResult> SignUp([Bind("ID,FirstName,LastName,UserName,Password,Email,Address,Phone")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +74,7 @@ namespace ProjectInternetAppsTest.Controllers
         }
 
         // GET: Users/Edit/5
-        public async Task<IActionResult> Login(int? id)
+        public IActionResult Login()
         {
             return View();
         }
@@ -93,6 +100,7 @@ namespace ProjectInternetAppsTest.Controllers
             }
             return View(user);
         }
+        
 
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -112,6 +120,7 @@ namespace ProjectInternetAppsTest.Controllers
             return View(user);
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
