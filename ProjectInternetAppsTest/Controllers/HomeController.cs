@@ -18,52 +18,52 @@ namespace ProjectInternetAppsTest.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         //public IActionResult Categories()
         //{
         //    return View();
         //}
 
-        public IActionResult Login()
-        {          
-            return View();
-        }
-        public IActionResult Cart()
-        {
-            return View();
-        }
+        //public IActionResult Login()
+        //{          
+        //    return View();
+        //}
+        //public IActionResult Cart()
+        //{
+        //    return View();
+        //}
         public IActionResult Contact()
         {
 
             //we should add a post function .... !!!!!!!!!!!!!!!
             return View();
         }
-        public IActionResult Pay()
-        {
-            return View();
-        }
-        public IActionResult SignUp()
-        {
-            return View();
-        }
+        //public IActionResult Pay()
+        //{
+        //    return View();
+        //}
+        //public IActionResult SignUp()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult Category()
-        {
-            return View();
-        }
-        public IActionResult Manager()
-        {
-            return View();
-        }
+        //public IActionResult Category()
+        //{
+        //    return View();
+        //}
+        //public IActionResult Manager()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult Product()
-        {
-            return View();
-        }
+        //public IActionResult Product()
+        //{
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

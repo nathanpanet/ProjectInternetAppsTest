@@ -62,7 +62,7 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignUp([Bind("ID,FirstName,LastName,UserName,Password,Email,Address,Phone")] User user)
+        public async Task<IActionResult> SignUp([Bind("FirstName,LastName,UserName,Password,Email,Address,Phone")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -100,8 +100,8 @@ namespace ProjectInternetAppsTest.Controllers
             }
             return View(user);
         }
-        
 
+        //for admin only!!!!!!!!!!!!!!!!!!!!
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

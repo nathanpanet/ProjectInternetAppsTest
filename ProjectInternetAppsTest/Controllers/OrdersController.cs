@@ -22,49 +22,51 @@ namespace ProjectInternetAppsTest.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+            //כל אחד לפי ההזמנות שלו 
+            //ומנהל שיקבל את כולם 
             return View(await _context.Order.ToListAsync());
         }
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //לבדוק שההזמנה שייכת אליו
+            if (id == null) return NotFound();
 
-            var order = await _context.Order
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+            var order = await _context.Order.FirstOrDefaultAsync(m => m.ID == id);
+            if (order == null) return NotFound();
 
             return View(order);
         }
 
-        // GET: Orders/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,AddedOn,ConfirmedOn,PayedOn,Status,TotalPrice")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(order);
-        }
 
+        //צריך לייצר פונקציה כזאת ביצירת עגלת קניות
+
+        //// GET: Orders/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        //// POST: Orders/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to.
+        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("ID,AddedOn,ConfirmedOn,PayedOn,Status,TotalPrice")] Order order)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(order);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(order);
+        //}
+
+
+        //לא בטוח שזה שימושי
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -116,6 +118,8 @@ namespace ProjectInternetAppsTest.Controllers
             return View(order);
         }
 
+
+        //for admin only!!!!!!!!!!!!!!!!!!!!
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -134,6 +138,8 @@ namespace ProjectInternetAppsTest.Controllers
             return View(order);
         }
 
+
+        //for admin only!!!!!!!!!!!!!!!!!!!!
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -143,6 +149,11 @@ namespace ProjectInternetAppsTest.Controllers
             _context.Order.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Pay()
+        {//should be a post function
+            return View();
         }
 
         private bool OrderExists(int id)

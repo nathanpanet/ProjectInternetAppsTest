@@ -9,12 +9,16 @@
 @foreach (var item in Model)
 {
     <div class="col p-4 text-center categorie-item">
-        <a class="text-light" style="text-decoration:none" asp-controller="Home" asp-action="Category">
+        <a class="text-light" style="text-decoration:none" asp-controller="Products" asp-action="Index" asp-route-id="@item.ID">
             <!--to insert each link!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
             <!--<img src="~/css/refrigerator_2x.png" alt="Category Name @item.Name" />-->
             <img src="@item.Img" alt="Category Name @item.Name" />  @*צריך להציג כתמונה - נדרשות המרות*@
             <p class="categorie-name">Category Name @item.Name</p>
         </a>
+        @*for admin only !!!!!!!!!!!!!!!!!!!!*@
+        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
     </div>
 }
 

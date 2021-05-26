@@ -18,13 +18,15 @@ namespace ProjectInternetAppsTest.Controllers
         {
             _context = context;
         }
-
+        
+        //HomePage
         // GET: Categories
         public async Task<IActionResult> Index()
         {
             return View(await _context.Category.ToListAsync());
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,18 +45,20 @@ namespace ProjectInternetAppsTest.Controllers
             return View(category);
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Categories/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // POST: Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Description,Img")] Category category)
+        public async Task<IActionResult> Create([Bind("Name,Description,Img")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +69,7 @@ namespace ProjectInternetAppsTest.Controllers
             return View(category);
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,6 +86,7 @@ namespace ProjectInternetAppsTest.Controllers
             return View(category);
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // POST: Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -116,6 +122,7 @@ namespace ProjectInternetAppsTest.Controllers
             return View(category);
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -134,6 +141,7 @@ namespace ProjectInternetAppsTest.Controllers
             return View(category);
         }
 
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

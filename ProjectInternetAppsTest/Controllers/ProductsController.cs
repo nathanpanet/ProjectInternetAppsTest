@@ -20,8 +20,9 @@ namespace ProjectInternetAppsTest.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
+            //we should get all the products for cotegoryID = id.....
             return View(await _context.Product.ToListAsync());
         }
 
@@ -43,18 +44,21 @@ namespace ProjectInternetAppsTest.Controllers
             return View(product);
         }
 
+
+        //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Price,Description,Img")] Product product)
+        public async Task<IActionResult> Create([Bind("Name,Price,Description,Img")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +69,8 @@ namespace ProjectInternetAppsTest.Controllers
             return View(product);
         }
 
+
+        //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,6 +87,8 @@ namespace ProjectInternetAppsTest.Controllers
             return View(product);
         }
 
+
+        //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -116,6 +124,8 @@ namespace ProjectInternetAppsTest.Controllers
             return View(product);
         }
 
+
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -134,6 +144,8 @@ namespace ProjectInternetAppsTest.Controllers
             return View(product);
         }
 
+
+        //for admin only !!!!!!!!!!!!!!!!!!!!
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

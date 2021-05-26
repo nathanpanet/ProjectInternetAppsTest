@@ -10,6 +10,8 @@ using ProjectInternetAppsTest.Models;
 
 namespace ProjectInternetAppsTest.Controllers
 {
+    //for admin only!!!!!!!!!!!!!!!!!!!!
+    //maybe for supliers also
     public class SaleDiscountsController : Controller
     {
         private readonly ProjectInternetAppsTestContext _context;
