@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -54,7 +55,7 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,UserName,Password,Email,Type,Address,Phone")] User user)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,UserName,Password,Email,Address,Phone")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -66,19 +67,9 @@ namespace ProjectInternetAppsTest.Controllers
         }
 
         // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Login(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
+            return View();
         }
 
         // POST: Users/Edit/5
@@ -86,32 +77,19 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,UserName,Password,Email,Type,Address,Phone")] User user)
+        public async Task<IActionResult> Login(int id, [Bind("ID,FirstName,LastName,UserName,Password,Email,Address,Phone")] User user)
         {
-            if (id != user.ID)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                var q = from a in _context.User
+                        where a.UserName == user.UserName &&
+                            a.Password == user.Password
+                        select a;
+                if (q.Count() > 0){
+                    HttpContext.Session.SetString("user", q.First().FirstName);
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
             return View(user);
         }

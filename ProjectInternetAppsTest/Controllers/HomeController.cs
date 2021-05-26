@@ -28,13 +28,8 @@ namespace ProjectInternetAppsTest.Controllers
         //    return View();
         //}
 
-        public IActionResult NewestGadgets()
-        {
-            return View();
-        }
-
         public IActionResult Login()
-        {
+        {          
             return View();
         }
         public IActionResult Cart()
@@ -58,7 +53,7 @@ namespace ProjectInternetAppsTest.Controllers
         {
             return View();
         }
-        public IActionResult manager()
+        public IActionResult Manager()
         {
             return View();
         }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "manager"; 
+    ViewData["Title"] = "Manager"; 
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -18,23 +18,22 @@
                 <div class="card-body">
                     <p class="card-text">
                         <form class="navbar-form pull-left">
-                            <input type="text" value="price" class="span2">
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <input type="text" placeholder="Price" class="span2">
                         </form>
                     </p>
                     <p class="card-text">
                         <form class="navbar-form pull-left">
-                            <input type="text" value="category" class="span2">
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <input type="text" placeholder="Category" class="span2">
                         </form>
                     </p>
                     <p class="card-text">
                         <form class="navbar-form pull-left">
-                            <input type="text" value="value "class="span2">
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <input type="text" placeholder="Value " class="span2">
+                            <button type="submit" class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Submit</button>
                         </form>
+                       
                     </p>
-
+                    
                 </div>
             </div>
         </div>

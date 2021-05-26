@@ -30,9 +30,9 @@ namespace ProjectInternetAppsTest
             services.AddDbContext<ProjectInternetAppsTestContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ProjectInternetAppsTestContext")));
             
-            services.AddSession(optioons =>
+            services.AddSession(options =>
             {
-                optioons.IdleTimeout = TimeSpan.FromMinutes(15);
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
             });
         }
 

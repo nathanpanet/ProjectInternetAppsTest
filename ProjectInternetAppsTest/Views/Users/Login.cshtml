@@ -1,0 +1,46 @@
+﻿@model ProjectInternetAppsTest.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@{
+    ViewData["Title"] = "SignUp";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form class="row g-3">
+    <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+    </div>
+    <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail4">
+    </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword4">
+    </div>
+    <div class="col-md-9">
+        <label for="inputAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="col-md-3">
+        <label for="inputCity" class="form-label">City</label>
+        <input type="text" class="form-control" id="inputCity">
+    </div>
+    <br />
+    <div class="col-12">
+        <br />
+        <button type="submit" class="btn btn-primary" asp-area="" asp-controller="Users" asp-action="Login">Sign up</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
