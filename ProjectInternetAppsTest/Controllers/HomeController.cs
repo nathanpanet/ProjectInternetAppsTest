@@ -41,9 +41,10 @@ namespace ProjectInternetAppsTest.Controllers
         {
 
             //we should add a post function .... !!!!!!!!!!!!!!!
-            if (HttpContext.Session.GetString("userType") != null)
+            if (HttpContext.Session.GetString("userType") == "User")
                 return View();
-            return View("../Users/Login");
+            else
+                return RedirectToAction("login","Users");
         }
         //public IActionResult Pay()
         //{

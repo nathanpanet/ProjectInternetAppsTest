@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +50,10 @@ namespace ProjectInternetAppsTest.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetString("userType") == "Admin"|| HttpContext.Session.GetString("userType") == "Supplier")
+                return View();
+            else
+                return RedirectToAction("login", "Users");
         }
 
         //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
@@ -60,13 +64,18 @@ namespace ProjectInternetAppsTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Price,Description,Img")] Product product)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(product);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(product);
             }
-            return View(product);
+            else
+                return RedirectToAction("login", "Users");
         }
 
 
@@ -74,17 +83,22 @@ namespace ProjectInternetAppsTest.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var product = await _context.Product.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
+                var product = await _context.Product.FindAsync(id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                return View(product);
             }
-            return View(product);
+            else
+                return RedirectToAction("login", "Users");
         }
 
 
@@ -96,32 +110,37 @@ namespace ProjectInternetAppsTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Price,Description,Img")] Product product)
         {
-            if (id != product.ID)
+            if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
             {
-                return NotFound();
-            }
+                if (id != product.ID)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.ID))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(product);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ProductExists(product.ID))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                return View(product);
             }
-            return View(product);
+            else
+                return RedirectToAction("login", "Users");
         }
 
 
@@ -129,19 +148,24 @@ namespace ProjectInternetAppsTest.Controllers
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("userType") == "Admin")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+                var product = await _context.Product
+                    .FirstOrDefaultAsync(m => m.ID == id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
 
-            return View(product);
+                return View(product);
+            }
+            else
+                return RedirectToAction("login", "Users");
         }
 
 
@@ -151,10 +175,15 @@ namespace ProjectInternetAppsTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Product.FindAsync(id);
-            _context.Product.Remove(product);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (HttpContext.Session.GetString("userType") == "Admin")
+            {
+                var product = await _context.Product.FindAsync(id);
+                _context.Product.Remove(product);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+                return RedirectToAction("login", "Users");
         }
 
         private bool ProductExists(int id)

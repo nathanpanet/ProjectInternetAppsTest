@@ -26,6 +26,7 @@ namespace ProjectInternetAppsTest.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.User.ToListAsync());
         }
 
@@ -84,7 +85,7 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(int? ID, [Bind("Username,Password")] User user)
+        public async Task<IActionResult> Login(int? ID, [Bind("UserName,Password")] User user)
         {
             var q = from a in _context.User
                     where a.UserName == user.UserName &&

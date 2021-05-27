@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -123,19 +124,24 @@ namespace ProjectInternetAppsTest.Controllers
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetString("userType") == "Admin")
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var order = await _context.Order
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
+                var order = await _context.Order
+                    .FirstOrDefaultAsync(m => m.ID == id);
+                if (order == null)
+                {
+                    return NotFound();
+                }
 
-            return View(order);
+                return View(order);
+            }
+            else
+                return RedirectToAction("login", "Users");
         }
 
 
@@ -145,10 +151,15 @@ namespace ProjectInternetAppsTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Order.FindAsync(id);
-            _context.Order.Remove(order);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (HttpContext.Session.GetString("userType") == "Admin")
+            {
+                var order = await _context.Order.FindAsync(id);
+                _context.Order.Remove(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+                return RedirectToAction("login", "Users");
         }
 
         public IActionResult Pay()
