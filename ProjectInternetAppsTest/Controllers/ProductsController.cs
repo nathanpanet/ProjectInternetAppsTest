@@ -161,5 +161,9 @@ namespace ProjectInternetAppsTest.Controllers
         {
             return _context.Product.Any(e => e.ID == id);
         }
+        public IActionResult Cart()
+        {
+            return View();
+        }
     }
 }

@@ -49,6 +49,7 @@ namespace ProjectInternetAppsTest.Controllers
         // GET: Categories/Create
         public IActionResult Create()
         {
+            //if(HttpContext.Session)
             return View();
         }
 
@@ -60,6 +61,7 @@ namespace ProjectInternetAppsTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Description,Img")] Category category)
         {
+            var q = 0;
             if (ModelState.IsValid)
             {
                 _context.Add(category);

@@ -84,21 +84,21 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(int id, [Bind("ID,FirstName,LastName,UserName,Password,Email,Address,Phone")] User user)
+        public async Task<IActionResult> Login(int? ID, [Bind("Username,Password")] User user)
         {
-
-            if (ModelState.IsValid)
+            var q = from a in _context.User
+                    where a.UserName == user.UserName &&
+                        a.Password == user.Password
+                    select a;
+            if (q.Count() > 0)
             {
-                var q = from a in _context.User
-                        where a.UserName == user.UserName &&
-                            a.Password == user.Password
-                        select a;
-                if (q.Count() > 0){
-                    HttpContext.Session.SetString("user", q.First().FirstName);
-                    return RedirectToAction(nameof(Index));
-                }
+                HttpContext.Session.SetString("user", q.First().FirstName);
+                HttpContext.Session.SetString("userType", q.First().Type.ToString());
+                return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            else
+                ViewData["Error"] = "Username/Password does not exist!";
+            return View();
         }
 
         //for admin only!!!!!!!!!!!!!!!!!!!!
