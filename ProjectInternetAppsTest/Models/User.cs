@@ -31,7 +31,8 @@ namespace ProjectInternetAppsTest.Models
         public string Email { get; set; }
        
         public UserType Type { get; set; } = UserType.User;
-        
+        //public int[] Cart { get; set; }
+
         public string Address { get; set; }
 
         [DataType(DataType.PhoneNumber)]

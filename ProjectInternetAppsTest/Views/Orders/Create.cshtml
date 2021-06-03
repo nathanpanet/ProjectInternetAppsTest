@@ -29,7 +29,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
+                @*<select asp-for="Status" class="form-control"></select>*@
+                <select class="form-select" asp-for="Status" aria-label="Default select example">
+                    <option selected></option>
+                    <option value="0">Cart</option>
+                    <option value="1">Ordered</option>
+                    <option value="2">Delivered</option>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">

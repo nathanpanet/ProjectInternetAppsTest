@@ -45,26 +45,33 @@ namespace ProjectInternetAppsTest.Controllers
         //צריך לייצר פונקציה כזאת ביצירת עגלת קניות
 
         //// GET: Orders/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        public IActionResult Create()
+        {
+            return View();
+        }
 
         //// POST: Orders/Create
         //// To protect from overposting attacks, enable the specific properties you want to bind to.
         //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("ID,AddedOn,ConfirmedOn,PayedOn,Status,TotalPrice")] Order order)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(order);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(order);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,AddedOn,ConfirmedOn,PayedOn,Status,TotalPrice")] Order order)
+        {
+            string v = HttpContext.Session.GetString("userId");
+            int a = Convert.ToInt32(v);
+            var q = from b in _context.User
+                    where b.ID == a
+                    select b;
+
+            order.User = q.FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(order);
+        }
 
 
         //לא בטוח שזה שימושי
@@ -170,6 +177,23 @@ namespace ProjectInternetAppsTest.Controllers
         private bool OrderExists(int id)
         {
             return _context.Order.Any(e => e.ID == id);
+        }
+        public async Task<IActionResult> NewOrder(Product product)
+        {
+            string v = HttpContext.Session.GetString("userId");
+            int a = Convert.ToInt32(v);
+            var q = from b in _context.User
+                    where b.ID == a
+                    select b;
+
+            //order.User = q.FirstOrDefault();
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Add(order);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            return View();
         }
     }
 }

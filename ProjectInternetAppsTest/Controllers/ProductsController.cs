@@ -51,13 +51,14 @@ namespace ProjectInternetAppsTest.Controllers
 
         //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Create
-        public async Task<IActionResult> CreateAsync(int? id)
+        public async Task<IActionResult> Create(int? id)
         {
             if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
             {
                 var q = from category in _context.Category
                         select category;
-                return View(await q.ToListAsync());
+                ViewData["Categories"] = q.ToList();
+                return View();
             }
             else
                 return RedirectToAction("login", "Users");

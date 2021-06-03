@@ -97,16 +97,17 @@ namespace ProjectInternetAppsTest.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(int? ID, [Bind("UserName,Password")] User user)
         {
+            string referer = Request.Headers["Referer"].ToString();
             var q = from a in _context.User
                     where a.UserName == user.UserName &&
                         a.Password == user.Password
                     select a;
             if (q.Count() > 0)
             {
-                HttpContext.Session.SetString("user", q.First().FirstName);
+                HttpContext.Session.SetString("userId", q.First().ID.ToString());
                 HttpContext.Session.SetString("userType", q.First().Type.ToString());
-                Signin(q.First());
-                return RedirectToAction(nameof(Index));
+                _ = Signin(q.First());
+                return RedirectToAction("Index","Categories");
             }
             else
                 ViewData["Error"] = "Username/Password does not exist!";

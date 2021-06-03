@@ -17,30 +17,34 @@
                     </div>
                     <!--<img src="~/css/dairy-products.png" class="card-img-top" />-->
                     <img src="@product.Img" class="card-img-top" /> @*צריך להציג כתמונה - נדרשות המרות*@
-                    <div class="card-body">
-                        <p class="card-text">
-                            @product.ShortDescription
-                        </p>
-                        <b class="text-left" style="display: flex;">
-                            Buy now for : @product.Price ₪ @*should have the discount if there is one!!!*@
-                        </b>
-                        <br />
-                        <a class="btn btn-primary"
-                           asp-controller="Home" asp-action="Details" asp-route-id="@product.ID">
-                            for more details
-                        </a>
-                        @*for admin only !!!!!! maybe the edit also for suplier*@
-                        @*for admin only !!!!!! maybe the edit also for suplier*@
-                        @*for admin only !!!!!! maybe the edit also for suplier*@
-                        @*for admin only !!!!!! maybe the edit also for suplier*@
-                        <a class="btn btn-outline-info btn-sm" asp-action="Edit" asp-route-id="@product.ID">
-                            Edit
-                        </a>
-                        <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@product.ID">
-                            Delete
-                        </a>
-                        @*till here*@
-                    </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        @product.ShortDescription
+                    </p>
+                    <b class="text-left" style="display: flex;">
+                        Buy now for : @product.Price ₪ @*should have the discount if there is one!!!*@
+                    </b>
+                    <br />
+                    <a class="btn btn-primary"
+                       asp-controller="Home" asp-action="Details" asp-route-id="@product.ID">
+                        for more details
+                    </a>
+                    <a class="btn btn-primary"
+                       asp-controller="Orders" asp-action="Create" asp-route-id="@product.ID">
+                        Add to cart
+                    </a>
+                    @*for admin only !!!!!! maybe the edit also for suplier*@
+                    @*for admin only !!!!!! maybe the edit also for suplier*@
+                    @*for admin only !!!!!! maybe the edit also for suplier*@
+                    @*for admin only !!!!!! maybe the edit also for suplier*@
+                    <a class="btn btn-outline-info btn-sm" asp-action="Edit" asp-route-id="@product.ID">
+                        Edit
+                    </a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@product.ID">
+                        Delete
+                    </a>
+                    @*till here*@
+                </div>
                 </div>
             </div>
         }
