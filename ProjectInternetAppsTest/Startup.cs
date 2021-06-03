@@ -10,6 +10,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ProjectInternetAppsTest.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using System.Net;
 
 namespace ProjectInternetAppsTest
 {
@@ -34,6 +37,8 @@ namespace ProjectInternetAppsTest
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(15);
             });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,12 +54,17 @@ namespace ProjectInternetAppsTest
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStatusCodePages(async context =>
+            { var response = context.HttpContext.Response; if (response.StatusCode == (int)HttpStatusCode.Unauthorized || 
+                response.StatusCode == (int)HttpStatusCode.Forbidden) response.Redirect("/Users/Login"); });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseSession();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

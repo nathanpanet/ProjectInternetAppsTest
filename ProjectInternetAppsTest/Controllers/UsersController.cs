@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -69,6 +72,7 @@ namespace ProjectInternetAppsTest.Controllers
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
+                Signin(user);
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -78,6 +82,12 @@ namespace ProjectInternetAppsTest.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Categories");
         }
 
         // POST: Users/Edit/5
@@ -95,11 +105,28 @@ namespace ProjectInternetAppsTest.Controllers
             {
                 HttpContext.Session.SetString("user", q.First().FirstName);
                 HttpContext.Session.SetString("userType", q.First().Type.ToString());
+                Signin(q.First());
                 return RedirectToAction(nameof(Index));
             }
             else
                 ViewData["Error"] = "Username/Password does not exist!";
             return View();
+        }
+
+        private async Task Signin(User user)
+        {
+            var Claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name,user.UserName),
+                new Claim("FullName",user.FirstName+" "+user.LastName),
+                new Claim(ClaimTypes.Role,user.Type.ToString())
+            };
+            var claimsIdentity = new ClaimsIdentity(
+                Claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties{};
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
         }
 
         //for admin only!!!!!!!!!!!!!!!!!!!!

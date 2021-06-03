@@ -1,26 +1,32 @@
 ﻿@model IEnumerable<ProjectInternetAppsTest.Models.Category>
 
-@{ ViewData["Title"] = "Home Page"; @*we should insert by controller and then view this in the H1*@ }
+@{ ViewData["Title"] = "Categories"; @*we should insert by controller and then view this in the H1*@ }
 <h1>@ViewData["Title"]</h1>
 
 <p class="d-grid gap-2" @*for admin and supliers only not for users !!*@>
     <a asp-action="Create" class="btn btn-secondary">Create New</a> @*to change???????????????*@
 </p>
-@foreach (var item in Model)
-{
-    <div class="col p-4 text-center category-item">
-        <a class="text-light" style="text-decoration:none" asp-controller="Products" asp-action="Index" asp-route-id="@item.ID">
-            <!--to insert each link!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-            <!--<img src="~/css/refrigerator_2x.png" alt="Category Name @item.Name" />-->
-            <img src="@item.Img" alt="Category Name @item.Name" />  @*צריך להציג כתמונה - נדרשות המרות*@
-            <p class="categorie-name">Category Name @item.Name</p>
-        </a>
-        @*admin*@
-        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>    |
-        <a asp-action="Details" asp-route-id="@item.ID">Details</a>    |
-        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col p-4 category-item">
+                <a class="text-center" style="text-decoration:none" asp-controller="Products" asp-action="Index" asp-route-id="@item.ID">
+                    <!--to insert each link!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                    <!--<img src="~/css/refrigerator_2x.png" alt="Category Name @item.Name" />-->
+                    <img src="@item.Img" height="100" width="100" alt="Category Name @item.Name" /><br />  @*צריך להציג כתמונה - נדרשות המרות*@
+                <b class="text-left" style="display: flex;">
+                   @item.Name
+                </b>
+                </a>
+                @*admin*@
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>  |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a>  |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </div>
+        }
     </div>
-}
+</div>
 
 
 

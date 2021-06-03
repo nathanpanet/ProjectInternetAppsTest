@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectInternetAppsTest.Models;
@@ -14,10 +15,10 @@ namespace ProjectInternetAppsTest.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
         //public IActionResult Index()
         //{
@@ -37,14 +38,15 @@ namespace ProjectInternetAppsTest.Controllers
         //{
         //    return View();
         //}
+        [Authorize]
         public IActionResult Contact()
         {
 
             //we should add a post function .... !!!!!!!!!!!!!!!
-            if (HttpContext.Session.GetString("userType") == "User")
-                return View();
-            else
-                return RedirectToAction("login","Users");
+            //if (HttpContext.Session.GetString("userType") == "User")
+            return View();
+            //else
+            //    return RedirectToAction("login","Users");
         }
         //public IActionResult Pay()
         //{

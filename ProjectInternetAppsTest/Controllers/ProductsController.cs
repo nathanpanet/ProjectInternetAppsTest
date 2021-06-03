@@ -24,7 +24,10 @@ namespace ProjectInternetAppsTest.Controllers
         public async Task<IActionResult> Index(int? id)
         {
             //we should get all the products for cotegoryID = id.....
-            return View(await _context.Product.ToListAsync());
+            var q = from a in _context.Product
+                    where a.Category.ID == id
+                    select a;
+            return View(await q.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -48,10 +51,14 @@ namespace ProjectInternetAppsTest.Controllers
 
         //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync(int? id)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin"|| HttpContext.Session.GetString("userType") == "Supplier")
-                return View();
+            if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
+            {
+                var q = from category in _context.Category
+                        select category;
+                return View(await q.ToListAsync());
+            }
             else
                 return RedirectToAction("login", "Users");
         }
@@ -62,7 +69,7 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,Description,Img")] Product product)
+        public async Task<IActionResult> Create([Bind("Name,Price,Description,Category,Img")] Product product)
         {
             if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
             {
