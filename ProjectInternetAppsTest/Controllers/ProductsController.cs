@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -51,6 +52,7 @@ namespace ProjectInternetAppsTest.Controllers
 
         //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Create
+        [Authorize(Roles = "Admin","Supplier")]
         public async Task<IActionResult> Create(int? id)
         {
             if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")

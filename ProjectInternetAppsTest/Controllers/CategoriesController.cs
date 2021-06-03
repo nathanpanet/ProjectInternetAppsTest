@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -26,7 +27,7 @@ namespace ProjectInternetAppsTest.Controllers
         {
             return View(await _context.Category.ToListAsync());
         }
-
+        [Authorize(Roles ="Admin")]
         //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -42,20 +43,15 @@ namespace ProjectInternetAppsTest.Controllers
             {
                 return NotFound();
             }
-            if (HttpContext.Session.GetString("userType") == "Admin")
                 return View(category);
-            else
-                return RedirectToAction("login", "Users");
         }
 
         //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Categories/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetString("userType") == "Admin")
-                return View();
-            else
-                return RedirectToAction("login", "Users");
+               return View();
         }
 
         //for admin only !!!!!!!!!!!!!!!!!!!!
@@ -64,10 +60,9 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Name,Description,Img")] Category category)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin")
-            {
                 var q = 0;
                 if (ModelState.IsValid)
                 {
@@ -76,17 +71,13 @@ namespace ProjectInternetAppsTest.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 return View(category);
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
         //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin")
-            {
                 if (id == null)
                 {
                     return NotFound();
@@ -98,9 +89,6 @@ namespace ProjectInternetAppsTest.Controllers
                     return NotFound();
                 }
                 return View(category);
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
         //for admin only !!!!!!!!!!!!!!!!!!!!
@@ -109,10 +97,9 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,Img")] Category category)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin")
-            {
                 if (id != category.ID)
                 {
                     return NotFound();
@@ -139,17 +126,13 @@ namespace ProjectInternetAppsTest.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 return View(category);
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
         //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin")
-            {
                 if (id == null)
                 {
                     return NotFound();
@@ -163,26 +146,19 @@ namespace ProjectInternetAppsTest.Controllers
                 }
 
                 return View(category);
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
         //for admin only !!!!!!!!!!!!!!!!!!!!
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin")
-            {
                 var category = await _context.Category.FindAsync(id);
                 _context.Category.Remove(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
         private bool CategoryExists(int id)
