@@ -52,18 +52,13 @@ namespace ProjectInternetAppsTest.Controllers
 
         //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Create
-        [Authorize(Roles = "Admin","Supplier")]
+        [Authorize(Roles = "Admin,Supplier")]
         public async Task<IActionResult> Create(int? id)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
-            {
                 var q = from category in _context.Category
                         select category;
                 ViewData["Categories"] = q.ToList();
                 return View();
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
         //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
@@ -72,10 +67,9 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Supplier")]
         public async Task<IActionResult> Create([Bind("Name,Price,Description,Category,Img")] Product product)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
-            {
                 if (ModelState.IsValid)
                 {
                     _context.Add(product);
@@ -83,18 +77,14 @@ namespace ProjectInternetAppsTest.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 return View(product);
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
 
         //for admin and suplier only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin,Supplier")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
-            {
                 if (id == null)
                 {
                     return NotFound();
@@ -106,9 +96,6 @@ namespace ProjectInternetAppsTest.Controllers
                     return NotFound();
                 }
                 return View(product);
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
 
@@ -118,10 +105,9 @@ namespace ProjectInternetAppsTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Supplier")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Price,Description,Img")] Product product)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin" || HttpContext.Session.GetString("userType") == "Supplier")
-            {
                 if (id != product.ID)
                 {
                     return NotFound();
@@ -148,18 +134,14 @@ namespace ProjectInternetAppsTest.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 return View(product);
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
 
         //for admin only !!!!!!!!!!!!!!!!!!!!
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin")
-            {
                 if (id == null)
                 {
                     return NotFound();
@@ -173,9 +155,6 @@ namespace ProjectInternetAppsTest.Controllers
                 }
 
                 return View(product);
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
 
@@ -183,17 +162,13 @@ namespace ProjectInternetAppsTest.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (HttpContext.Session.GetString("userType") == "Admin")
-            {
                 var product = await _context.Product.FindAsync(id);
                 _context.Product.Remove(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-                return RedirectToAction("login", "Users");
         }
 
         private bool ProductExists(int id)

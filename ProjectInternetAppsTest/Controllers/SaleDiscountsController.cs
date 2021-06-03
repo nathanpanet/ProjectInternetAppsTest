@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace ProjectInternetAppsTest.Controllers
 {
     //for admin only!!!!!!!!!!!!!!!!!!!!
     //maybe for supliers also
+    [Authorize(Roles = "Admin")]
     public class SaleDiscountsController : Controller
     {
         private readonly ProjectInternetAppsTestContext _context;
