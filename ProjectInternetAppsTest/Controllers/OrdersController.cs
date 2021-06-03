@@ -178,22 +178,20 @@ namespace ProjectInternetAppsTest.Controllers
         {
             return _context.Order.Any(e => e.ID == id);
         }
-        public async Task<IActionResult> NewOrder(Product product)
+        public async Task<IActionResult> NewOrder(int? id)
         {
             string v = HttpContext.Session.GetString("userId");
             int a = Convert.ToInt32(v);
-            var q = from b in _context.User
-                    where b.ID == a
+            var order = from b in _context.Order
+                    where b.User.ID == a
                     select b;
-
-            //order.User = q.FirstOrDefault();
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(order);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            return View();
+            var q = from b in _context.Product
+                    where b.ID == id
+                    select b;
+            if (order.FirstOrDefault()!=null && q.FirstOrDefault()!=null){
+                order.FirstOrDefault().Products.Add(q.FirstOrDefault());
+            }
+            return RedirectToAction("Index","Products");
         }
     }
 }

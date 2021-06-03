@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace ProjectInternetAppsTest.Models
         //Migration is needed
         
         public string Img { get; set; }
+        [Required]
         public Category Category { get; set; }
         //public int CategoryID { get; set; }
         public SaleDiscount Discount { get; set; }
